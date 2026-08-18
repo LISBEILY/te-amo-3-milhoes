@@ -1,7 +1,7 @@
 // Inicializar Lucide Icons
 lucide.createIcons();
 
-// Configuración del canvas de fondo con partículas y números 09
+// Configuración del canvas de fondo
 const bgCanvas = document.getElementById('bg-canvas');
 const bgCtx = bgCanvas.getContext('2d');
 
@@ -64,13 +64,13 @@ function sendSaudades() {
     window.open(`https://wa.me/${targetNumber}?text=${message}`, '_blank');
 }
 
-// Función principal al hacer clic en "Clique"
+// Acción al presionar "Clique"
 function handleClique() {
     drawFilledHeart();
     spawnFloatingPhrases();
 }
 
-// Genera frases flotantes adaptadas al ancho de la pantalla
+// Frases flotantes
 function spawnFloatingPhrases() {
     const container = document.getElementById('floating-words-container');
     const phrases = [
@@ -106,13 +106,12 @@ function spawnFloatingPhrases() {
     }
 }
 
-// Dibujar Corazón Adaptativo de Palabras
+// Dibujar Corazón
 function drawFilledHeart() {
     const canvas = document.getElementById('heart-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     
-    // Ancho fijo interno para resolución constante
     canvas.width = 400;
     canvas.height = 400;
 
