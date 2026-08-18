@@ -20,7 +20,7 @@
     <!-- Fundo de Partículas e Números 09 Chiquitos -->
     <canvas id="bg-canvas"></canvas>
 
-    <!-- Contenedor para las Frases Flotantes de 6 Segundos -->
+    <!-- Contenedor para las Frases Flotantes -->
     <div id="floating-words-container" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
 
     <!-- Conteúdo Principal -->
@@ -37,14 +37,13 @@
             </div>
         </section>
 
-        <!-- Unica Foto Principal -->
+        <!-- Foto Principal Local -->
         <section class="flex justify-center">
             <div class="relative group w-full max-w-xs sm:max-w-sm rounded-2xl overflow-hidden bg-black/80 neon-border p-2">
                 <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-gray-900 flex items-center justify-center">
                     <img id="main-photo" 
-                         src="https://lh3.googleusercontent.com/d/1D3nurKo1HApRCZBgprWFtoFM6U-RqjKH" 
+                         src="foto.jpg" 
                          alt="Nossa Foto" 
-                         referrerpolicy="no-referrer"
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-md p-2 rounded-full border border-green-500/50 text-green-400 shadow-lg">
                         <i data-lucide="heart" class="w-5 h-5 fill-green-500"></i>
@@ -91,7 +90,7 @@
             </button>
         </section>
 
-        <!-- Sección del Corazón Interactive -->
+        <!-- Sección del Corazón Interactivo -->
         <section class="text-center space-y-4 pt-2">
             <div class="flex justify-center">
                 <button onclick="handleClique()" class="px-7 py-2.5 md:px-8 md:py-3 rounded-full bg-green-500/10 text-green-400 neon-border hover:bg-green-500 hover:text-black font-semibold text-sm tracking-wider transition-all duration-300 flex items-center gap-2">
