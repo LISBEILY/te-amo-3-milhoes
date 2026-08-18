@@ -12,9 +12,9 @@ function resizeBgCanvas() {
 window.addEventListener('resize', resizeBgCanvas);
 resizeBgCanvas();
 
-const elements = Array.from({ length: 55 }, () => ({
-    x: Math.random() * bgCanvas.width,
-    y: Math.random() * bgCanvas.height,
+const elements = Array.from({ length: 45 }, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
     isNumber: Math.random() > 0.6,
     size: Math.random() * 2 + 1,
     speedX: (Math.random() - 0.5) * 0.3,
@@ -70,7 +70,7 @@ function handleClique() {
     spawnFloatingPhrases();
 }
 
-// Genera frases flotantes en pantalla por 6 segundos
+// Genera frases flotantes adaptadas al ancho de la pantalla
 function spawnFloatingPhrases() {
     const container = document.getElementById('floating-words-container');
     const phrases = [
@@ -82,49 +82,52 @@ function spawnFloatingPhrases() {
         "te amo para sempre 💚"
     ];
 
-    // Crea entre 18 y 25 frases repartidas en toda la pantalla
-    const count = 22;
+    const count = window.innerWidth < 640 ? 14 : 22;
     for (let i = 0; i < count; i++) {
         const el = document.createElement('div');
         el.className = 'floating-phrase';
         el.innerText = phrases[Math.floor(Math.random() * phrases.length)];
         
-        // Posición aleatoria en pantalla
-        el.style.left = Math.random() * 80 + 10 + '%';
-        el.style.top = Math.random() * 70 + 15 + '%';
+        el.style.left = Math.random() * 75 + 10 + '%';
+        el.style.top = Math.random() * 65 + 15 + '%';
         
-        // Tamaños variados similares a los elementos flotantes
-        const fontSize = Math.floor(Math.random() * 10) + 14; // entre 14px y 24px
+        const fontSize = window.innerWidth < 640 
+            ? Math.floor(Math.random() * 4) + 12 
+            : Math.floor(Math.random() * 8) + 14;
+        
         el.style.fontSize = `${fontSize}px`;
-        
-        // Ligero retardo inicial para dinamismo
-        el.style.animationDelay = `${Math.random() * 0.8}s`;
+        el.style.animationDelay = `${Math.random() * 0.6}s`;
 
         container.appendChild(el);
 
-        // Se eliminan automáticamente al terminar la animación (6 segundos)
         setTimeout(() => {
             el.remove();
-        }, 6800);
+        }, 6500);
     }
 }
 
-// Dibujar Corazón Relleno Grande y Legible
+// Dibujar Corazón Adaptativo de Palabras
 function drawFilledHeart() {
     const canvas = document.getElementById('heart-canvas');
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    
+    // Ancho fijo interno para resolución constante
+    canvas.width = 400;
+    canvas.height = 400;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const phrase = "te amo gor ";
     let phraseIndex = 0;
 
     const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2 - 20;
-    const scale = 18; // Escala grandote
+    const centerY = canvas.height / 2 - 15;
+    const scale = 11.5; 
 
-    ctx.font = "bold 13px monospace";
+    ctx.font = "bold 10px monospace";
     ctx.fillStyle = "#4ade80";
-    ctx.shadowBlur = 8;
+    ctx.shadowBlur = 6;
     ctx.shadowColor = "#22c55e";
 
     function isInHeart(px, py) {
@@ -143,15 +146,16 @@ function drawFilledHeart() {
             return;
         }
 
-        for (let x = centerX - 18 * scale; x <= centerX + 18 * scale; x += 11) {
+        for (let x = centerX - 18 * scale; x <= centerX + 18 * scale; x += 8.5) {
             if (isInHeart(x, y)) {
                 const char = phrase[phraseIndex % phrase.length];
                 phraseIndex++;
                 ctx.fillText(char, x, y);
             }
         }
-        y += 14;
+        y += 10.5;
     }, 18);
 }
 
 window.onload = drawFilledHeart;
+window.onresize = drawFilledHeart;
